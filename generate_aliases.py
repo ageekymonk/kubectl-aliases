@@ -33,12 +33,12 @@ def main():
     globs = [('sys', '--namespace=kube-system', None, ['sys'])]
 
     ops = [
-        ('a', 'apply --recursive -f', None, None),
         ('ex', 'exec -i -t', None, None),
         ('lo', 'logs -f', None, None),
         ('lop', 'logs -f -p', None, None),
         ('p', 'proxy', None, ['sys']),
         ('g', 'get', None, None),
+        ('c', 'create', None, None),
         ('d', 'describe', None, None),
         ('rm', 'delete', None, None),
         ('run', 'run --rm --restart=Never --image-pull-policy=IfNotPresent -i -t', None, None),
@@ -46,9 +46,16 @@ def main():
 
     res = [
         ('po', 'pods', ['g', 'd', 'rm'], None),
+        ('pvc', 'pvc', ['g', 'd', 'rm'], None),
+        ('pv', 'pv', ['g', 'd', 'rm'], None),
+        ('r', 'role', ['c', 'g', 'd', 'rm'], None),
+        ('cr', 'clusterrole', ['c', 'g', 'd', 'rm'], None),
+        ('rb', 'rolebinding', ['c', 'g', 'd', 'rm'], None),
+        ('crb', 'clusterrolebinding', ['c', 'g', 'd', 'rm'], None),
+        ('sa', 'sa', ['g', 'd', 'rm'], None),
         ('dep', 'deployment', ['g', 'd', 'rm'], None),
         ('svc', 'service', ['g', 'd', 'rm'], None),
-        ('ing', 'ingress', ['g', 'd', 'rm'], None),
+        ('i', 'ingress', ['g', 'd', 'rm'], None),
         ('cm', 'configmap', ['g', 'd', 'rm'], None),
         ('sec', 'secret', ['g', 'd', 'rm'], None),
         ('no', 'nodes', ['g', 'd'], ['sys']),
@@ -178,6 +185,3 @@ def diff(a, b):
 
 if __name__ == '__main__':
     main()
-
-
-			
