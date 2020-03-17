@@ -53,6 +53,8 @@ def main():
         ('rb', 'rolebinding', ['c', 'g', 'd', 'rm'], None),
         ('crb', 'clusterrolebinding', ['c', 'g', 'd', 'rm'], None),
         ('sa', 'sa', ['g', 'd', 'rm'], None),
+        ('cert', 'certificate', ['g', 'd', 'rm'], None),
+        ('sc', 'sc', ['g', 'd', 'rm'], None),
         ('dep', 'deployment', ['g', 'd', 'rm'], None),
         ('svc', 'service', ['g', 'd', 'rm'], None),
         ('i', 'ingress', ['g', 'd', 'rm'], None),
@@ -64,15 +66,15 @@ def main():
     res_types = [r[0] for r in res]
 
     args = [
-        ('oyaml', '-o=yaml', ['g'], ['owide', 'ojson', 'sl']),
-        ('owide', '-o=wide', ['g'], ['oyaml', 'ojson']),
-        ('ojson', '-o=json', ['g'], ['owide', 'oyaml', 'sl']),
+        ('oy', '-o=yaml', ['g'], ['ow', 'oj', 'sl']),
+        ('ow', '-o=wide', ['g'], ['oy', 'oj']),
+        ('oj', '-o=json', ['g'], ['ow', 'oy', 'sl']),
         ('all', '--all-namespaces', ['g', 'd'], ['rm', 'f', 'no', 'sys'
          ]),
-        ('sl', '--show-labels', ['g'], ['oyaml', 'ojson']
+        ('sl', '--show-labels', ['g'], ['oy', 'oj']
          + diff(res_types, ['po', 'dep'])),
         ('all', '--all', ['rm'], None), # caution: reusing the alias
-        ('w', '--watch', ['g'], ['oyaml', 'ojson', 'owide']),
+        ('w', '--watch', ['g'], ['oy', 'oj', 'ow']),
         ]
 
     # these accept a value, so they need to be at the end and
